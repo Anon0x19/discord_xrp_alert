@@ -1,0 +1,4 @@
+pip==2.24.0
+requests==2.24.0
+asyncio==3.4.3
+discord==1.0.1
