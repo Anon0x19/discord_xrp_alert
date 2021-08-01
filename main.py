@@ -7,13 +7,18 @@ import json
 import requests
 import asyncio
 import time
+import os
 
 bot = discord.Client()
 
-with open("./keys.json", "r") as file:
+try{
+    with open("./keys.json", "r") as file:
         data = json.load(file)
         TOKEN = data['token']
         print("Bot Running")
+}except{
+    os._exit()
+}
 
 @bot.event
 async def on_ready():
@@ -34,7 +39,7 @@ async def on_ready():
             message = await channel.send(stri)
 
 
-@tasks.loop(minutes=4.9)
+@tasks.loop(minutes=1.0)
 async def background_task():
     await bot.wait_until_ready()
     await asyncio.sleep(2)
@@ -80,8 +85,17 @@ async def on_update():
 # @bot.event
 # async def on_message(message):
 #     channel3 = bot.get_channel(844975733204975616)
+#     message2 = 
 #     if (message.channel == channel3) and (message.content == message2):
 #         await message.purge(amount=1)
+
+
+# @bot.event
+# async def check(message):
+#     return message.author.id == 844966976459505665
+# messages = await channel.history(limit=100, check=check).flatten()
+
+
 
 background_task.start()
 on_update.start()
