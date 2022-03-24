@@ -19,9 +19,9 @@ with open("./keys.json", "r") as file:
 
 @bot.event
 async def on_ready():
-    channel2 = bot.get_channel(844975733204975616)
+    channel2 = bot.get_channel(Channel_ID)
     await channel2.purge()
-    channel = bot.get_channel(844975691408736306)
+    channel = bot.get_channel({Channel_ID})
     await channel.purge()
     global status
     status = requests.get("https://api.whale-alert.io/v1/status?api_key=qKPYPcqsN8vlKWfxvpZai3aUqXMzZmsk").json()
@@ -53,7 +53,7 @@ async def background_task():
 @tasks.loop(seconds=5.7)
 async def on_update():
     await bot.wait_until_ready()
-    channel3 = bot.get_channel(844975733204975616)
+    channel3 = bot.get_channel({Channel_ID})
     global data
     data = requests.get("https://api.whale-alert.io/v1/transactions?api_key=qKPYPcqsN8vlKWfxvpZai3aUqXMzZmsk").json()['transactions']
     for i in data:
